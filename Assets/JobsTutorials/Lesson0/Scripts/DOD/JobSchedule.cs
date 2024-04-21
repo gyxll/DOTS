@@ -1,4 +1,4 @@
-using Unity.Collections;
+ï»¿using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Jobs;
@@ -101,20 +101,20 @@ namespace Jobs.DOD
             parallelForBatch.Run(100,10);
             parallelForBatch.RunBatch(10);
             parallelForBatch.Run(100, 10);
-            parallelForBatch.Schedule(100, 10, transformHandle);//²¢ĞĞµ÷¶È100¸öJobBatch£¬Ã¿¸ö²¢ĞĞÅú´ÎË÷ÒıÊıÁ¿Îª10
-            parallelForBatch.ScheduleBatch(100, 10, transformHandle);//¹¦ÄÜºÍÉÏÃæµÄµ÷¶È·½·¨Ò»Ñù
-            parallelForBatch.ScheduleParallel(100, 10, transformHandle);//¹¦ÄÜºÍÉÏÃæµÄµ÷¶È·½·¨Ò»Ñù
+            parallelForBatch.Schedule(100, 10, transformHandle);//å¹¶è¡Œè°ƒåº¦100ä¸ªJobBatchï¼Œæ¯ä¸ªå¹¶è¡Œæ‰¹æ¬¡ç´¢å¼•æ•°é‡ä¸º10
+            parallelForBatch.ScheduleBatch(100, 10, transformHandle);//åŠŸèƒ½å’Œä¸Šé¢çš„è°ƒåº¦æ–¹æ³•ä¸€æ ·
+            parallelForBatch.ScheduleParallel(100, 10, transformHandle);//åŠŸèƒ½å’Œä¸Šé¢çš„è°ƒåº¦æ–¹æ³•ä¸€æ ·
 
             var parallelForDefer = new JobParallelForDeferImplement();
-            var deferHandle = parallelForDefer.Schedule(executeTarget, 16, transformHandle);//µ÷¶ÈexecuteTarget³¤¶ÈµÄJob£¬16ÎªÃ¿´Îµü´úµÄÊıÁ¿
+            var deferHandle = parallelForDefer.Schedule(executeTarget, 16, transformHandle);//è°ƒåº¦executeTargeté•¿åº¦çš„Jobï¼Œ16ä¸ºæ¯æ¬¡è¿­ä»£çš„æ•°é‡
 
             var jobFilter = new JobFilterImplement();
             jobFilter.RunAppend(executeTarget, 100);
-            jobFilter.RunFilter(executeTarget);//ÔÚÖ÷Ïß³ÌÉÏ¹ıÂË
-            jobFilter.ScheduleFilter(executeTarget, transformHandle);//Execute·µ»ØfalseµÄË÷Òı»á±»´ÓScheduleFilterÒÆ³ı
+            jobFilter.RunFilter(executeTarget);//åœ¨ä¸»çº¿ç¨‹ä¸Šè¿‡æ»¤
+            jobFilter.ScheduleFilter(executeTarget, transformHandle);//Executeè¿”å›falseçš„ç´¢å¼•ä¼šè¢«ä»ScheduleFilterç§»é™¤
             NativeList<int> result = new();
             var combineDepends = JobHandle.CombineDependencies(deferHandle, transformHandle);
-            jobFilter.ScheduleAppend(result, 100, combineDepends);//Execute·µ»ØtrueµÄË÷Òı»á¸½¼Óµ½resultÁĞ±íÄÚ£¬µ±Ç°µ÷¶ÈÒÀÀµÓÚdeferHandleºÍtransformHandle
+            jobFilter.ScheduleAppend(result, 100, combineDepends);//Executeè¿”å›trueçš„ç´¢å¼•ä¼šé™„åŠ åˆ°resultåˆ—è¡¨å†…ï¼Œå½“å‰è°ƒåº¦ä¾èµ–äºdeferHandleå’ŒtransformHandle
 
         }
 

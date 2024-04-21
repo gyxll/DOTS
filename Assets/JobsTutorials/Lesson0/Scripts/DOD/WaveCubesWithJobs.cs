@@ -1,4 +1,4 @@
-using Unity.Burst;
+锘縰sing Unity.Burst;
 using Unity.Collections;
 using Unity.Profiling;
 using UnityEngine;
@@ -9,22 +9,22 @@ namespace Jobs.DOD
     [BurstCompile]
     struct WaveCubesJob : IJobParallelForTransform
     {
-        [ReadOnly]//表面数据为只读状态，不会出现线程安全问题
+        [ReadOnly]//琛ㄩ潰鏁版嵁涓哄彧璇荤姸鎬侊紝涓嶄細鍑虹幇绾跨▼瀹夊叏闂
         public NativeArray<float> distances;
         [ReadOnly]
         public float time;
         /// <summary>
-        /// 幅度
+        /// 骞呭害
         /// </summary>
         [ReadOnly]
         public float amplitude;
         /// <summary>
-        /// 频率
+        /// 棰戠巼
         /// </summary>
         [ReadOnly]
         public float frequency;
         /// <summary>
-        /// 波长
+        /// 娉㈤暱
         /// </summary>
         [ReadOnly]
         public float waveLength;
@@ -41,25 +41,25 @@ namespace Jobs.DOD
         public int xRadio = 40;
         public int zRadio = 40;
         /// <summary>
-        /// 幅度
+        /// 骞呭害
         /// </summary>
         public float amplitude = 9;
         /// <summary>
-        /// 频率
+        /// 棰戠巼
         /// </summary>
         public float frequency = 3;
         /// <summary>
-        /// 波长
+        /// 娉㈤暱
         /// </summary>
         public float waveLength = 0.2f;
         private int totalNum;
         private TransformAccessArray cubes;
         /// <summary>
-        /// 记录每个立方体的距离
+        /// 璁板綍姣忎釜绔嬫柟浣撶殑璺濈
         /// </summary>
         private NativeArray<float> distances;
         /// <summary>
-        /// 性能分析数据
+        /// 鎬ц兘鍒嗘瀽鏁版嵁
         /// </summary>
         static readonly ProfilerMarker<int> profilerMarker = new("WaveCubesWithJobs UpdateTransform", "Objects Count");
         void Start()
