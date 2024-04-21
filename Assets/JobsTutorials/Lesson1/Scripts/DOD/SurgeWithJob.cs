@@ -76,14 +76,14 @@ namespace Jobs.DOD
         /// <summary>
         /// 是否抵达目的地
         /// </summary>
-        private bool[] isReachArr;
+        private bool[] isReachedArr;
         private NativeArray<Vector3> targetPosNativeArr;
         private NativeArray<float> rotateSpeedNativeArr;
         private NativeArray<float> moveSpeedNativeArr;
         /// <summary>
         /// 是否抵达目的地
         /// </summary>
-        private NativeArray<bool> isReachNativeArr;
+        private NativeArray<bool> isReachedNativeArr;
         #endregion
         static readonly ProfilerMarker profilerMarker = new("CubesMarchWithJob");
         // Start is called before the first frame update：
@@ -101,15 +101,15 @@ namespace Jobs.DOD
             targetPosArr = new Vector3[generationTotalNum];
             rotateSpeedArr = new float[generationTotalNum];
             moveSpeedArr = new float[generationTotalNum];
-            isReachArr = new bool[generationTotalNum];
+            isReachedArr = new bool[generationTotalNum];
             for (int i = 0; i < generationTotalNum; i++)
             {
-                isReachArr[i] = true;
+                isReachedArr[i] = true;
             }
             targetPosNativeArr = new NativeArray<Vector3>(generationTotalNum, Allocator.Persistent);
             rotateSpeedNativeArr = new NativeArray<float>(generationTotalNum, Allocator.Persistent);
             moveSpeedNativeArr = new NativeArray<float>(generationTotalNum, Allocator.Persistent);
-            isReachNativeArr = new NativeArray<bool>(generationTotalNum, Allocator.Persistent);
+            isReachedNativeArr = new NativeArray<bool>(generationTotalNum, Allocator.Persistent);
         }
 
         private void OnDestroyCube(GameObject obj)
@@ -158,7 +158,7 @@ namespace Jobs.DOD
             targetPosArr[nativeIndex] = targetPos;
             rotateSpeedArr[nativeIndex] = rotateSpeed;
             moveSpeedArr[nativeIndex] = moveSpeed;
-            isReachArr[nativeIndex] = false;
+            isReachedArr[nativeIndex] = false;
         }
 
         private void Update()
@@ -185,23 +185,23 @@ namespace Jobs.DOD
                 targetPosNativeArr.CopyFrom(targetPosArr);
                 rotateSpeedNativeArr.CopyFrom(rotateSpeedArr);
                 moveSpeedNativeArr.CopyFrom(moveSpeedArr);
-                isReachNativeArr.CopyFrom(isReachArr);
+                isReachedNativeArr.CopyFrom(isReachedArr);
                 var randomMoveAndRotateJob = new RandomMoveAndRotateJob
                 {
                     targetPosArr = targetPosNativeArr,
                     rotateSpeedArr = rotateSpeedNativeArr,
                     moveSpeedArr = moveSpeedNativeArr,
-                    isReachArr = isReachNativeArr,
+                    isReachedArr = isReachedNativeArr,
                     distanceFlag = DistanceFlag,
                     deltaTime = Time.deltaTime
                 };
                 var jobHandle = randomMoveAndRotateJob.Schedule(cubesAccessArray);
                 jobHandle.Complete();
                 //将Job执行完成后的数据读回 isReachArr，将已抵达的内容放回对象池
-                isReachNativeArr.CopyTo(isReachArr);
+                isReachedNativeArr.CopyTo(isReachedArr);
                 for (int i = 0; i < generationTotalNum; i++)
                 {
-                    if (isReachArr[i] && indexObjDic.ContainsKey(i) && indexObjDic[i].activeSelf)
+                    if (isReachedArr[i] && indexObjDic.ContainsKey(i) && indexObjDic[i].activeSelf)
                     {
                         cubesPool.Release(indexObjDic[i]);
                     }
@@ -216,7 +216,7 @@ namespace Jobs.DOD
             targetPosNativeArr.Dispose();
             rotateSpeedNativeArr.Dispose();
             moveSpeedNativeArr.Dispose();
-            isReachNativeArr.Dispose();
+            isReachedNativeArr.Dispose();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Jobs.DOD
         /// 是否抵达目的地
         /// </summary>
         [NativeDisableParallelForRestriction]
-        public NativeArray<bool> isReachArr;
+        public NativeArray<bool> isReachedArr;
         [ReadOnly]
         public float distanceFlag;
         [ReadOnly]
@@ -28,14 +28,14 @@ namespace Jobs.DOD
 
         public void Execute(int index, TransformAccess transform)
         {
-            if (isReachArr[index])
+            if (isReachedArr[index])
             {
                 return;
             }
             var dir = targetPosArr[index] - transform.position;
             if (math.lengthsq(dir) < distanceFlag)
             {
-                isReachArr[index] = true;
+                isReachedArr[index] = true;
             }
             else
             {
