@@ -11,13 +11,14 @@ namespace Jobs.DOD
     [UpdateInGroup(typeof(CreateEntitiesByPrefabSystemGroup))]
     partial struct CubeGenerateByPrefabSystem : ISystem
     {
+        [BurstCompile]
         public void OnCreate(ref SystemState state) 
         {
             state.RequireForUpdate<CubeGeneratorByPrefab>();
         }
-
+        [BurstCompile]
         public void OnDestroy(ref SystemState state) { }
-
+        [BurstCompile]
         public void OnUpdate(ref SystemState state) 
         {
             var generatorPrefab = SystemAPI.GetSingleton<CubeGeneratorByPrefab>();
@@ -26,7 +27,7 @@ namespace Jobs.DOD
             int count = 0;
             foreach (var entity in entityArr)
             {
-                var randomRotate = new RotateSpeed() { rotateSpeed = math.radians(count) };
+                var randomRotate = new RotateSpeed() { rotateSpeed = math.radians(count * 180) };
                 state.EntityManager.AddComponentData(entity, randomRotate);
                 var position = new float3((count - generatorPrefab.count * 0.5f) * 1.2f, 0, 0);
                 SystemAPI.GetComponentRW<LocalTransform>(entity).ValueRW.Position = position;

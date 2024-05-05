@@ -7,7 +7,7 @@ namespace Jobs.DOD
 {
     public partial class CreateEntitiesByPrefabSystemGroup : AuthoringSceneSystemGroup
     {
-        protected override string AuthoringSceneName => "EntitiesCreateDynamicSubScene";
+        protected override string AuthoringSceneName => "EntitiesCreateDynamic";
     }
 
 }
