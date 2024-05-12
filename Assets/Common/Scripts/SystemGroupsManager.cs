@@ -1,6 +1,5 @@
-using Unity.Entities;
+﻿using Unity.Entities;
 using Unity.Scenes;
-using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +19,7 @@ namespace DOTS.DOD
         {
             if (!initialized)
             {
+                //判断是否是所属场景
                 if (SceneManager.GetActiveScene().isLoaded)
                 {
                     var subScene = Object.FindObjectOfType<SubScene>();

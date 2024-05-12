@@ -1,7 +1,4 @@
 using DOTS.DOD;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Jobs.DOD
 {
@@ -9,5 +6,4 @@ namespace Jobs.DOD
     {
         protected override string AuthoringSceneName => "EntitiesCreateDynamic";
     }
-
 }
