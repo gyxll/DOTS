@@ -7,7 +7,7 @@ namespace DOTS.DOD.Lesson3
     public partial struct CubeRotateIJobEntity:IJobEntity
     {
         public float deltaTime;
-        void Execute(ref LocalTransform localTransform,in RotateSpeed rotateSpeed)
+        void Execute(ref LocalTransform localTransform,in RotateSpeed rotateSpeed)//Execute中的参数为我们的查询条件
         {
             localTransform = localTransform.RotateY(rotateSpeed.speed * deltaTime);//注意这里要赋值
         }

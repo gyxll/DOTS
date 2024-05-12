@@ -15,6 +15,7 @@ namespace DOTS.DOD.Lesson3
         {
             var localTransformArr = chunk.GetNativeArray(ref localTransformTypeHandle);
             var rotateArr = chunk.GetNativeArray(ref rotateTypeHandle);
+            //新建迭代器进行迭代
             var enumator = new ChunkEntityEnumerator(useEnabledMask, chunkEnabledMask, rotateArr.Length);
             while (enumator.NextEntityIndex(out int index))
             {
@@ -32,6 +33,7 @@ namespace DOTS.DOD.Lesson3
         [BurstCompile]
         public void OnCreate(ref SystemState state) 
         {
+            //预先生成查询和ComponentTypeHandle
             localTransformTypeHandle = state.GetComponentTypeHandle<LocalTransform>();
             rotateTypeHandle = state.GetComponentTypeHandle<RotateSpeed>(false);
             var entityQueryBuilder = new EntityQueryBuilder(Allocator.Temp).WithAll<LocalTransform, RotateSpeed>();
@@ -42,7 +44,7 @@ namespace DOTS.DOD.Lesson3
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            //TypeHandle是在多个Update中共用的，
+            //ComponentTypeHandle是在多个Update中共用的，
             //需要在System.OnUpdate内执行TypeHandle的Update
             localTransformTypeHandle.Update(ref state);
             rotateTypeHandle.Update(ref state);
