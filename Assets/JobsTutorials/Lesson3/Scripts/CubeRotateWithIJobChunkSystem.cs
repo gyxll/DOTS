@@ -6,21 +6,27 @@ using Unity.Transforms;
 
 namespace DOTS.DOD.Lesson3
 {
-    public struct CubeRotateWithIJobChunk : IJobChunk
+    public partial struct CubeRotateWithIJobChunk : IJobChunk
     {
         public float deltaTime;
         public ComponentTypeHandle<LocalTransform> localTransformTypeHandle;
+        [ReadOnly]
         public ComponentTypeHandle<RotateSpeed> rotateTypeHandle;
         public void Execute(in ArchetypeChunk chunk, int unfilteredChunkIndex, bool useEnabledMask, in v128 chunkEnabledMask)
         {
             var localTransformArr = chunk.GetNativeArray(ref localTransformTypeHandle);
             var rotateArr = chunk.GetNativeArray(ref rotateTypeHandle);
-            //新建迭代器进行迭代
+            //新建迭代器进行迭代，传入useEnabledMask和chunkEnabledMask的对结果进行过滤后再迭代
             var enumator = new ChunkEntityEnumerator(useEnabledMask, chunkEnabledMask, rotateArr.Length);
             while (enumator.NextEntityIndex(out int index))
             {
                 localTransformArr[index] = localTransformArr[index].RotateY(rotateArr[index].speed * deltaTime);
             }
+            //未对mask进行过滤，如果需要过滤enabled，要自己写代码进行判断
+            //for (int i = 0, length = chunk.Count; i < length; i++)
+            //{
+            //    localTransformArr[i] = localTransformArr[i].RotateY(rotateArr[i].speed * deltaTime);
+            //}
         }
     }
     [BurstCompile]
