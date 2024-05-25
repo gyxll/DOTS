@@ -4,7 +4,7 @@
 
 public class #SCRIPTNAME# : AuthoringSceneSystemGroup
 {
-    protected override string AuthoringSceneName => "YourSceneName";
+    protected partial override string AuthoringSceneName => "YourSceneName";
 }       
 
 #ROOTNAMESPACEEND#
