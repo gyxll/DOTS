@@ -38,8 +38,8 @@ namespace DOTS.DOD.Lesson4
                     var cube = generateCubes[count];
                     var cubeTransform = SystemAPI.GetComponentRW<LocalTransform>(cube);
                     cubeTransform.ValueRW.Position = new float3(i * 1.1f, 0, j * 1.1f);
-                    var cubeTag = new WaveCubeDistance() { distance = math.distance(cubeTransform.ValueRO.Position, float3.zero) };
-                    state.EntityManager.AddComponentData(cube, cubeTag);//添加tag组件用于查询
+                    var cubeDistance = new WaveCubeDistance() { distance = math.distance(cubeTransform.ValueRO.Position, float3.zero) };
+                    state.EntityManager.AddComponentData(cube, cubeDistance);//添加距离数据组件
                     count++;
                 }
             }
@@ -47,4 +47,4 @@ namespace DOTS.DOD.Lesson4
             state.Enabled = false;//只执行一次
         }
     }
-}       
+}

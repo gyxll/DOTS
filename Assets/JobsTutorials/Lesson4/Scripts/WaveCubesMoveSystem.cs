@@ -30,7 +30,7 @@ namespace DOTS.DOD.Lesson4
             {
                 var moveJob = new WaveCubeEntityMoveJob()
                 {
-                    elapsedTime = (float)SystemAPI.Time.ElapsedTime
+                    elapsedTime = SystemAPI.Time.ElapsedTime
                 };
                 moveJob.ScheduleParallel();
             }            
