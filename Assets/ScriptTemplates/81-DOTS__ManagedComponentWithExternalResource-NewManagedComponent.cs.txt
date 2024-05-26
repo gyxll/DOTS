@@ -14,7 +14,9 @@ class #SCRIPTNAME# : IComponentData, IDisposable, ICloneable
         return new #SCRIPTNAME# { };
     }
 }
-
+/// <summary>
+/// ？？？
+/// </summary>
 public class #SCRIPTNAME#Authoring : MonoBehaviour
 {
     public class Baker : Baker<#SCRIPTNAME#Authoring>

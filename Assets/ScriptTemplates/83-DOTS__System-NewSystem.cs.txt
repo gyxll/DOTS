@@ -4,6 +4,9 @@ using Unity.Entities;
 #ROOTNAMESPACEBEGIN#
 [BurstCompile]
 [RequireMatchingQueriesForUpdate]
+/// <summary>
+/// ？？？
+/// </summary>
 public partial struct #SCRIPTNAME# : ISystem
 {
     [BurstCompile]

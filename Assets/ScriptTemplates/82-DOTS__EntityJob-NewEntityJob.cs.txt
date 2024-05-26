@@ -3,9 +3,12 @@ using Unity.Entities;
 
 #ROOTNAMESPACEBEGIN#
 [BurstCompile]
+/// <summary>
+/// ？？？
+/// </summary>
 partial struct #SCRIPTNAME# : IJobEntity
 {
-    void Execute(ref, in)
+    void Execute(/**ref, in要查询的内容*/)
     {
     #NOTRIM#
     }

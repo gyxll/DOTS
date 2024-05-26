@@ -3,6 +3,9 @@ using Unity.Entities;
 
 #ROOTNAMESPACEBEGIN#
 [RequireMatchingQueriesForUpdate]
+/// <summary>
+/// ？？？
+/// </summary>
 public partial class #SCRIPTNAME# : SystemBase
 {
     protected override void OnUpdate()

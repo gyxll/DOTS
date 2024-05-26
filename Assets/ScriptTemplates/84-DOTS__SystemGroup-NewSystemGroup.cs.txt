@@ -1,7 +1,9 @@
 ﻿using DOTS.DOD;
 
 #ROOTNAMESPACEBEGIN#
-
+/// <summary>
+/// ？？？
+/// </summary>
 public class #SCRIPTNAME# : AuthoringSceneSystemGroup
 {
     protected partial override string AuthoringSceneName => "YourSceneName";

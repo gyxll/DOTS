@@ -6,7 +6,9 @@ class #SCRIPTNAME# : IComponentData
 {
 #NOTRIM#
 }
-
+/// <summary>
+/// ？？？
+/// </summary>
 public class #SCRIPTNAME#Authoring : MonoBehaviour
 {
     public class Baker : Baker<#SCRIPTNAME#Authoring>
